@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Demo E-commerce GA4</title>
+  <!-- Substitua pelo seu Measurement ID do GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Seu ID do GA4
+    gtag('config', 'G-XXXXXXX');
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 40px; }
+    h1 { text-align: center; }
+    .btn-container { display: flex; flex-direction: column; gap: 16px; max-width: 300px; margin: 0 auto; }
+    button {
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .buy { background: #16a34a; color: #fff; }
+    .add { background: #3b82f6; color: #fff; }
+    .remove { background: #ef4444; color: #fff; }
+    .promo { background: #eab308; color: #000; }
+  </style>
+</head>
+<body>
+  <h1>Simulação de Loja — GA4</h1>
+  <div class="btn-container">
+    <button class="buy" onclick="comprar()">Comprar</button>
+    <button class="add" onclick="adicionarCarrinho()">Adicionar ao Carrinho</button>
+    <button class="remove" onclick="removerCarrinho()">Remover do Carrinho</button>
+    <button class="promo" onclick="acessarPromocao()">Acessar Promoção</button>
+  </div>
+
+  <script>
+    function comprar() {
+      gtag('event', 'purchase', {
+        transaction_id: 'T12345',
+        value: 99.90,
+        currency: 'BRL',
+        items: [{ id: 'P01', name: 'Produto Exemplo', quantity: 1, price: 99.90 }]
+      });
+      alert("Evento 'purchase' enviado ao GA4!");
+    }
+
+    function adicionarCarrinho() {
+      gtag('event', 'add_to_cart', {
+        currency: 'BRL',
+        value: 49.90,
+        items: [{ id: 'P02', name: 'Produto Teste', quantity: 1, price: 49.90 }]
+      });
+      alert("Evento 'add_to_cart' enviado ao GA4!");
+    }
+
+    function removerCarrinho() {
+      gtag('event', 'remove_from_cart', {
+        currency: 'BRL',
+        value: 49.90,
+        items: [{ id: 'P02', name: 'Produto Teste', quantity: 1, price: 49.90 }]
+      });
+      alert("Evento 'remove_from_cart' enviado ao GA4!");
+    }
+
+    function acessarPromocao() {
+      gtag('event', 'view_promotion', {
+        promotion_id: 'PROMO2025',
+        promotion_name: 'Promoção de Verão',
+        creative_name: 'Banner Principal',
+        creative_slot: 'home_banner'
+      });
+      alert("Evento 'view_promotion' enviado ao GA4!");
+    }
+  </script>
+</body>
+</html>
