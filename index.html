@@ -44,35 +44,35 @@
   </div>
   <script>
     function comprar() {
-      gtag('event', 'purchase', {
+      gtag('event', 'item_purchase', {
         transaction_id: 'T12345',
         value: 99.90,
         currency: 'BRL',
         items: [{ id: 'P01', name: 'Produto Exemplo', quantity: 1, price: 99.90 }]
       });
-      alert("Evento 'purchase' enviado ao GA4!");
+      alert("Evento 'item_purchase' enviado ao GA4!");
     }
 
     function adicionarCarrinho() {
-      gtag('event', 'add_to_cart', {
+      gtag('event', 'add_cart', {
       });
-      alert("Evento 'add_to_cart' enviado ao GA4!");
+      alert("Evento 'add_cart' enviado ao GA4!");
     }
 
     function removerCarrinho() {
-      gtag('event', 'remove_from_cart', {
+      gtag('event', 'empty_cart', {
       });
-      alert("Evento 'remove_from_cart' enviado ao GA4!");
+      alert("Evento 'empty_cart' enviado ao GA4!");
     }
 
     function acessarPromocao() {
-      gtag('event', 'view_promotion', {
+      gtag('event', 'enter_sale', {
         promotion_id: 'PROMO2025',
         promotion_name: 'Promoção de Verão',
         creative_name: 'Banner Principal',
         creative_slot: 'home_banner'
       });
-      alert("Evento 'view_promotion' enviado ao GA4!");
+      alert("Evento 'enter_sale' enviado ao GA4!");
     }
   </script>
 </body>
