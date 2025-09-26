@@ -1,106 +1,3 @@
-<!--
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  
-  <meta charset="utf-8">
-  <title>Demo E-commerce GA4</title>
-  
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 40px; }
-    h1 { text-align: center; }
-    .btn-container { display: flex; flex-direction: column; gap: 16px; max-width: 300px; margin: 0 auto; }
-    button {
-      padding: 14px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .buy { background: #16a34a; color: #fff; }
-    .add { background: #3b82f6; color: #fff; }
-    .remove { background: #ef4444; color: #fff; }
-    .promo { background: #eab308; color: #000; }
-  </style>
-
-  <!-- Google Tag Manager --
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PFX3SGF6');</script>
-<!-- End Google Tag Manager --
-  
-</head>
-<body>
-  <!-- Google Tag Manager (noscript) --
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFX3SGF6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) --
-  <h1>Simulação de Loja — GA4</h1>
-  <div class="btn-container">
-    <button class="buy" onclick="comprar()">Comprar Item</button>
-    <button class="add" onclick="adicionarCarrinho()">Adicionar ao Carrinho</button>
-    <button class="remove" onclick="removerCarrinho()">Remover do Carrinho</button>
-    <button class="promo" onclick="acessarPromocao()">Acessar Promoção</button>
-  </div>
-  
-  <script>
-    window.comprar = function() {
-      dataLayer.push({
-        event: "purchase",
-        ecommerce: {
-          transaction_id: "T12345",
-          value: 99.90,
-          currency: "BRL",
-          items: [
-            { item_id: "P01", item_name: "Produto Exemplo", quantity: 1, price: 99.90 }
-          ]
-        }
-      });
-      alert("Evento 'purchase' enviado para dataLayer!");
-    }
-
-    window.adicionarCarrinho = function() {
-      dataLayer.push({
-        event: "add_to_cart",
-        ecommerce: 
-        }
-      });
-      alert("Evento 'add_to_cart' enviado para dataLayer!");
-    }
-    
-
-    window.removerCarrinho = function() {
-      dataLayer.push({
-        event: "remove_from_cart",
-        ecommerce: {
-        }
-      });
-      alert("Evento 'remove_from_cart' enviado para dataLayer!");
-    }
-
-    window.acessarPromocao = function() {
-      dataLayer.push({
-        event: "view_promotion",
-        ecommerce: {
-          promotion_id: "PROMO2025",
-          promotion_name: "Promoção de Verão",
-          creative_name: "Banner Principal",
-          creative_slot: "home_banner"
-        }
-      });
-      alert("Evento 'view_promotion' enviado para dataLayer!");
-    }
-  </script>
-</body>
-</html>
-
--->
-
-
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -175,6 +72,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       dataLayer.push({
         event: "remove_from_cart",
         ecommerce: {
+          promotion_id: 'PROMO2025',
+        promotion_name: 'Promoção de Verão',
+        creative_name: 'Banner Principal',
+        creative_slot: 'home_banner'
         }
       });
       alert("Evento 'remove_from_cart' enviado para dataLayer!");
@@ -191,6 +92,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 </body>
 </html>
+
 
 
 
