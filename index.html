@@ -44,8 +44,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="remove" onclick="removerCarrinho()">Remover do Carrinho</button>
     <button class="promo" onclick="acessarPromocao()">Acessar Promoção</button>
   </div>
+  
   <script>
-    function comprar() {
+    window.comprar = function() {
       dataLayer.push({
         event: "purchase",
         ecommerce: {
@@ -60,7 +61,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       alert("Evento 'purchase' enviado para dataLayer!");
     }
 
-    function adicionarCarrinho() {
+    window.adicionarCarrinho = function() {
       dataLayer.push({
         event: "add_to_cart",
         ecommerce: 
@@ -69,7 +70,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       alert("Evento 'add_to_cart' enviado para dataLayer!");
     }
 
-    function removerCarrinho() {
+    window.removerCarrinho = function() {
       dataLayer.push({
         event: "remove_from_cart",
         ecommerce: {
@@ -78,7 +79,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       alert("Evento 'remove_from_cart' enviado para dataLayer!");
     }
 
-    function acessarPromocao() {
+    window.acessarPromocao = function() {
       dataLayer.push({
         event: "view_promotion",
         ecommerce: {
@@ -93,6 +94,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 </body>
 </html>
+
 
 
 
