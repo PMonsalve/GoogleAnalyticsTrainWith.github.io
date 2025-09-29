@@ -30,6 +30,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .add { background: #3b82f6; color: #fff; }
     .remove { background: #ef4444; color: #fff; }
     .promo { background: #eab308; color: #000; }
+    .sign { background: #000000; color: #fff; }
   </style>
 </head>
 <body>
@@ -37,10 +38,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h1>Simulação de Loja — GA4 via Data Layer</h1>
   <div class="btn-container">
-    <button class="buy" onclick="comprar()">Comprarar</button>
+    <button class="buy" onclick="comprar()">Comprar</button>
     <button class="add" onclick="adicionarCarrinho()">Adicionar ao Carrinho</button>
     <button class="remove" onclick="removerCarrinho()">Remover do Carrinho</button>
     <button class="promo" onclick="acessarPromocao()">Acessar Promoção</button>
+    <button class="sign" onclick="cadastrar()">Fazer Cadastro</button>
   </div>
 
   <script>
@@ -90,9 +92,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
       alert("Evento 'view_promotion' enviado para dataLayer!");
     }
+
+    function cadastrar() {
+      dataLayer.push({
+        event: "sign_in",
+        ecommerce: {
+        }
+      });
+      alert("Evento 'sign_in' enviado para dataLayer!");
+    }
   </script>
 </body>
 </html>
+
 
 
 
