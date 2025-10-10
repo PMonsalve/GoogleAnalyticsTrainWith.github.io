@@ -26,7 +26,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       cursor: pointer;
       font-weight: bold;
     }
-    .buy { background: #16a34a; color: #fff; }
+    .buySingular { background: #16a34a; color: #fff; }
+    .buyMultiple { background: #16a34a; color: #fff; }
     .add { background: #3b82f6; color: #fff; }
     .remove { background: #ef4444; color: #fff; }
     .promo { background: #eab308; color: #000; }
@@ -38,7 +39,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h1>Simulação de Loja — GA4 via Data Layer</h1>
   <div class="btn-container">
-    <button class="buy" onclick="comprar()">Comprar</button>
+    <button class="buySingular" onclick="comprarNormal()">Comprar</button>
+    <button class="buyMultiple" onclick="comprarMultiple()">Comprar Multiplos Itens</button>
     <button class="add" onclick="adicionarCarrinho()">Adicionar ao Carrinho</button>
     <button class="remove" onclick="removerCarrinho()">Remover do Carrinho</button>
     <button class="promo" onclick="acessarPromocao()">Acessar Promoção</button>
@@ -46,18 +48,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <script>
-    function comprar() {
+    function comprarNormal() {
       dataLayer.push({
-        event: "purchase",
+        event: "purchase_one",
         ecommerce: {
           transaction_id: "T12345",
+          value: 99.90,
+          currency: "BRL",
+          item:
+            { item_id: "P01", item_name: "Produto Exemplo", quantity: 1, price: 99.90 }
+          }
+      });
+      alert("Evento 'purchase' enviado para dataLayer!");
+    }
+
+    function comprarMultiple() {
+      dataLayer.push({
+        event: "purchase_more",
+        ecommerce: {
+          transaction_id: "T6789",
           value: 149.90,
           currency: "BRL",
           item:[
-            { item_id: "P01", item_name: "Produto Exemplo", quantity: 1, price: 99.90 },
+            { item_id: "P02", item_name: "Produto 1 Grupo", quantity: 1, price: 99.90 },
             {
-              item_id: "P02",
-              item_name: "Poção Alquímica",
+              item_id: "P03",
+              item_name: "Produto 2 Grupo",
               quantity: 1,
               price: 79.90
             }
@@ -66,6 +82,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
       alert("Evento 'purchase' enviado para dataLayer!");
     }
+
 
     function adicionarCarrinho() {
       dataLayer.push({
@@ -111,6 +128,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 </body>
 </html>
+
 
 
 
