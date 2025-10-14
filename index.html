@@ -27,6 +27,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight: bold;
     }
     .buySingular { background: #16a34a; color: #fff; }
+    .buyGroupPart { background: #16a34a; color: #fff; }
     .buyMultiple { background: #16a34a; color: #fff; }
     .add { background: #3b82f6; color: #fff; }
     .remove { background: #ef4444; color: #fff; }
@@ -40,6 +41,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h1>Simulação de Loja — GA4 via Data Layer</h1>
   <div class="btn-container">
     <button class="buySingular" onclick="comprarNormal()">Comprar Um Item</button>
+    <button class="buyGroupPart" onclick="comprarGroupPart()">Comprar Parte do Grupo</button>
     <button class="buyMultiple" onclick="comprarMultiple()">Comprar Multiplos Itens</button>
     <button class="add" onclick="adicionarCarrinho()">Adicionar ao Carrinho</button>
     <button class="remove" onclick="removerCarrinho()">Remover do Carrinho</button>
@@ -50,37 +52,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>
     function comprarNormal() {
       dataLayer.push({
-        event: "purchase_one",
+        event: "purchase",
         ecommerce: {
-          transaction_id: "T12345",
+          transaction_id: "Test12345",
           value: 99.90,
           currency: "BRL",
           item:
-            { item_id: "P01", item_name: "Produto Exemplo", quantity: 1, price: 99.90 }
+            { item_id: "ProdTestSolo", item_name: "Produto Singular", quantity: 1, price: 99.90 }
           }
       });
-      alert("Evento 'purchase_one' enviado para dataLayer!");
+      alert("Evento 'purchase' de item sozinho enviado para dataLayer!");
+    }
+
+    function comprarGroupPart() {
+      dataLayer.push({
+        event: "purchase",
+        ecommerce: {
+          transaction_id: "Test6789",
+          value: 79.90,
+          currency: "BRL",
+          item:
+            { item_id: "ProdTest03", item_name: "Produto 2 do Grupo", quantity: 1, price: 79.90 }
+          }
+      });
+      alert("Evento 'purchase' de item parte do grupo enviado para dataLayer!");
     }
 
     function comprarMultiple() {
       dataLayer.push({
         event: "purchase",
         ecommerce: {
-          transaction_id: "T6789",
+          transaction_id: "TestGroup1234",
           value: 149.90,
           currency: "BRL",
           item:[
-            { item_id: "P02", item_name: "Produto 1 Grupo", quantity: 1, price: 99.90 },
-            {
-              item_id: "P03",
-              item_name: "Produto 2 Grupo",
-              quantity: 1,
-              price: 79.90
-            }
+            { item_id: "ProdTest02", item_name: "Produto 1 do Grupo", quantity: 1, price: 99.90 },
+            { item_id: "ProdTest03", item_name: "Produto 2 do Grupo", quantity: 1, price: 79.90 }
             ]
         }
       });
-      alert("Evento 'purchase' enviado para dataLayer!");
+      alert("Evento 'purchase' de itens de grupo enviado para dataLayer!");
     }
 
 
@@ -128,6 +139,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 </body>
 </html>
+
 
 
 
