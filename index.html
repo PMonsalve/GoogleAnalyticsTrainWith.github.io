@@ -8,7 +8,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PFX3SGF6');</script>
   <meta charset="utf-8">
   <title>Demo E-commerce GA4</title>
-  <!-- Container do GTM (substitua pelo seu ID do GTM ex: GTM-XXXXXXX) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -26,9 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       cursor: pointer;
       font-weight: bold;
     }
-    .buySingular { background: #16a34a; color: #fff; }
-    .buyGroupPart { background: #16a34a; color: #fff; }
-    .buyMultiple { background: #16a34a; color: #fff; }
+    .buySingular, .buyGroupPart, .buyMultiple { background: #16a34a; color: #fff; }
     .add { background: #3b82f6; color: #fff; }
     .remove { background: #ef4444; color: #fff; }
     .promo { background: #eab308; color: #000; }
@@ -42,7 +39,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="btn-container">
     <button class="buySingular" onclick="comprarNormal()">Comprar Um Item</button>
     <button class="buyGroupPart" onclick="comprarGroupPart()">Comprar Parte do Grupo</button>
-    <button class="buyMultiple" onclick="comprarMultiple()">Comprar Multiplos Itens</button>
+    <button class="buyMultiple" onclick="comprarMultiple()">Comprar Múltiplos Itens</button>
     <button class="add" onclick="adicionarCarrinho()">Adicionar ao Carrinho</button>
     <button class="remove" onclick="removerCarrinho()">Remover do Carrinho</button>
     <button class="promo" onclick="acessarPromocao()">Acessar Promoção</button>
@@ -50,67 +47,85 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <script>
+    // Função para gerar transaction_id dinâmico
+    function gerarTransactionId(value) {
+      const agora = new Date();
+      const h = agora.getHours();
+      const m = agora.getMinutes();
+      const s = agora.getSeconds();
+      const base = Number(`${h}${m}${s}`); // concatena hora+minuto+segundo
+      const id = Math.round(base * value);
+      return "TX-" + id;
+    }
+
     function comprarNormal() {
+      const value = 99.90;
+      const transactionId = gerarTransactionId(value);
+
       dataLayer.push({
         event: "purchase",
         ecommerce: {
-          transaction_id: "Test12345",
-          value: 99.90,
+          transaction_id: transactionId,
+          value: value,
           currency: "BRL",
-          item:
-            { item_id: "ProdTestSolo", item_name: "Produto Singular", quantity: 1, price: 99.90 }
+          item: {
+            item_id: "ProdTestSolo",
+            item_name: "Produto Singular",
+            quantity: 1,
+            price: value
           }
+        }
       });
-      alert("Evento 'purchase' de item sozinho enviado para dataLayer!");
+      alert(`Evento 'purchase' enviado!\ntransaction_id: ${transactionId}`);
     }
 
     function comprarGroupPart() {
+      const value = 79.90;
+      const transactionId = gerarTransactionId(value);
+
       dataLayer.push({
         event: "purchase",
         ecommerce: {
-          transaction_id: "Test6789",
-          value: 79.90,
+          transaction_id: transactionId,
+          value: value,
           currency: "BRL",
-          item:
-            { item_id: "ProdTest03", item_name: "Produto 2 do Grupo", quantity: 1, price: 79.90 }
+          item: {
+            item_id: "ProdTest03",
+            item_name: "Produto 2 do Grupo",
+            quantity: 1,
+            price: value
           }
+        }
       });
-      alert("Evento 'purchase' de item parte do grupo enviado para dataLayer!");
+      alert(`Evento 'purchase' de parte do grupo enviado!\ntransaction_id: ${transactionId}`);
     }
 
     function comprarMultiple() {
+      const value = 149.90;
+      const transactionId = gerarTransactionId(value);
+
       dataLayer.push({
         event: "purchase",
         ecommerce: {
-          transaction_id: "TestGroup1234",
-          value: 149.90,
+          transaction_id: transactionId,
+          value: value,
           currency: "BRL",
-          item:[
+          items: [
             { item_id: "ProdTest02", item_name: "Produto 1 do Grupo", quantity: 1, price: 99.90 },
             { item_id: "ProdTest03", item_name: "Produto 2 do Grupo", quantity: 1, price: 79.90 }
-            ]
+          ]
         }
       });
-      alert("Evento 'purchase' de itens de grupo enviado para dataLayer!");
+      alert(`Evento 'purchase' múltiplo enviado!\ntransaction_id: ${transactionId}`);
     }
 
-
     function adicionarCarrinho() {
-      dataLayer.push({
-        event: "add_to_cart",
-        ecommerce: {
-        }
-      });
+      dataLayer.push({ event: "add_to_cart", ecommerce: {} });
       alert("Evento 'add_to_cart' enviado para dataLayer!");
     }
 
     function removerCarrinho() {
-      dataLayer.push({
-        event: "remove_from_cart",
-        ecommerce: {
-          
-        }
-      });
+      dataLayer.push({ event: "remove_from_cart", ecommerce: {} });
       alert("Evento 'remove_from_cart' enviado para dataLayer!");
     }
 
@@ -119,48 +134,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         event: "view_promotion",
         ecommerce: {
           promotion_id: 'PROMO2025',
-        promotion_name: 'Promoção de Verão',
-        creative_name: 'Banner Principal',
-        creative_slot: 'home_banner',
-        creative_test: 'teste'
+          promotion_name: 'Promoção de Verão',
+          creative_name: 'Banner Principal',
+          creative_slot: 'home_banner',
+          creative_test: 'teste'
         }
       });
       alert("Evento 'view_promotion' enviado para dataLayer!");
     }
 
     function cadastrar() {
-      dataLayer.push({
-        event: "sign_in",
-        ecommerce: {
-        }
-      });
+      dataLayer.push({ event: "sign_in", ecommerce: {} });
       alert("Evento 'sign_in' enviado para dataLayer!");
     }
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
